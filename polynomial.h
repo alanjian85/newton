@@ -9,7 +9,7 @@
 
 typedef struct {
     float coefficient;
-    float exponent;
+    int exponent;
 } term;
 
 typedef struct {
