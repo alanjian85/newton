@@ -19,4 +19,6 @@ typedef struct {
 
 real_t poly_eval(polynomial f, real_t x);
 
+polynomial poly_dfdx(polynomial f);
+
 #endif // POLYNOMIAL_H
