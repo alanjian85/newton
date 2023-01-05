@@ -1,6 +1,7 @@
 #include <stdio.h>
 
 #include "polynomial.h"
+#include "newton.h"
 
 int main() {
     polynomial f;
@@ -9,11 +10,7 @@ int main() {
     f.terms[0].exponent = 6;
     f.terms[1].coefficient = -2;
     f.terms[1].exponent = 0;
-    printf("Evaluation of f(1.2246205): %lf\n", poly_eval(f, 1.2246205));
-
     polynomial dfdx = poly_dfdx(f);
-    for (int i = 0; i < dfdx.size; ++i)
-        printf("Term %i: %lfx^%lf\n", i + 1, dfdx.terms[i].coefficient, dfdx.terms[i].exponent);
-
+    printf("The approximation of the sixth root of 2 that is accurate to 8 decimal places is: %lf\n", newton(f, dfdx, 1, 8));
     return 0;
 }
