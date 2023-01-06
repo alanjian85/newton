@@ -2,7 +2,7 @@
 
 #include <math.h>
 
-real_t newton(polynomial f, polynomial dfdx, real_t initial_x, int precision) {
+real_t newton(poly_t f, poly_t dfdx, real_t initial_x, int precision) {
     real_t prev, curr = initial_x;
     const int multiplier = pow(10, precision);
     do {
