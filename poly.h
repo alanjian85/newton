@@ -8,7 +8,7 @@
 #define POLY_CAPACITY 100
 
 typedef struct {
-    float coefficient;
+    real_t coefficient;
     int exponent;
 } term_t;
 

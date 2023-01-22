@@ -1,16 +1,35 @@
 #include <stdio.h>
+#include <string.h>
 
 #include "poly.h"
 #include "newton.h"
 
 int main() {
+    real_t guess;
+    int precision;
+    printf("Initial guess: ");
+    scanf("%lf", &guess);
+    printf("Precision: ");
+    scanf("%d", &precision);
+    char input[512];
+    scanf("%*c");
+    printf("Polynomial: ");
+    fgets(input, sizeof(input), stdin);
+    const char* delimiters = "+";
+    char* token = strtok(input, delimiters);
     poly_t f;
-    f.size = 2;
-    f.terms[0].coefficient = 1;
-    f.terms[0].exponent = 6;
-    f.terms[1].coefficient = -2;
-    f.terms[1].exponent = 0;
+    f.size = 0;
+    while (token) {
+        real_t coefficient;
+        int exponent;
+        char c;
+        sscanf(token, "%lf%*c%*c%i", &coefficient, &exponent);
+        f.terms[f.size].coefficient = coefficient;
+        f.terms[f.size].exponent = exponent;
+        ++f.size;
+        token = strtok(NULL, delimiters);
+    }
     poly_t dfdx = poly_dfdx(f);
-    printf("The approximation of the sixth root of 2 that is accurate to 8 decimal places is: %lf\n", newton(f, dfdx, 1, 8));
+    printf("%lf\n", newton(f, dfdx, guess, guess));
     return 0;
 }
